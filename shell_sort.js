@@ -19,9 +19,8 @@ const shellSort = (arr,step)=> {
 			}
 			step = Math.floor(step/2)
 		}
-		console.log(arr)
 		return arr	
 	})	
 }
 
-shellSort([1,3,2,5,3,7,4])
+console.log(shellSort([1,3,2,5,3,7,4]))

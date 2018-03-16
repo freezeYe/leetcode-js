@@ -1,9 +1,7 @@
 //直接插入排序
 const insertSort = (arr)=> {
 	if(!arr || arr.length < 2) return arr
-	return ((fn)=> {
-		return fn(arr)
-	})(arr => {
+	return ((fn)=> return fn(arr))(arr => {
 		for(let i=1; i<arr.length; i++) {
 			for(let j=i; j>0; j--) {
 				if(arr[j] < arr[j-1]) {
@@ -13,9 +11,8 @@ const insertSort = (arr)=> {
 				break
 			}
 		}
-	console.log(arr)
 	return arr
 	})
 }
 
-insertSort([2,1,4,6,5,3])
+console.log(insertSort([2,1,4,6,5,3]))

@@ -12,8 +12,7 @@ const bubbleSort = (arr)=> {
 			}
 		}
 	}
-	console.log(arr)
 	return arr
 }
 
-bubbleSort([2,1,4,6,5,3])
+console.log(bubbleSort([2,1,4,6,5,3]))
