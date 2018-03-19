@@ -3,8 +3,8 @@ function mergeSort(arr) {
 	if(arr.length <= 1) return arr
 	arr = [...arr]
 	const num = parseInt(arr.length / 2)
-	const left = arguments.callee(arr.slice(0,num))
-	const right = arguments.callee(arr.slice(num))
+	const left = mergeSort(arr.slice(0,num))
+	const right = mergeSort(arr.slice(num))
 	return ((f)=> f(left,right))(
 		(left,right)=> {
 			let result = [],
