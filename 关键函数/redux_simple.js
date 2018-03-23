@@ -105,8 +105,68 @@ function combineReducers(reducers) {
 	}
 }
 
+/*
+ * 应用中间件方法
+ * 对dispatch方法进行改写
+ */
+ function applyMiddleware(...middlewares) {
+ 	return (createStore) => (reducer, preloadedState, enhancer) => {
+ 		const store = createStore(reducer, preloadedState, enhancer)
+ 		let dispatch = store.dispatch
+ 		let chain = []
 
+ 		const middlewaresAPI = {
+ 			getState: store.getState,
+ 			dispatch: action => dispatch(action)
+ 		}
+ 		chain = middlewares.map(middleware=> middleware(middlewaresAPI)) 
+ 		dispatch = compose(...chain)(store.dispatch)
+ 		return {
+ 			...store,
+ 			dispatch
+ 		}
+ 	}
+ }
+ //对中间件进行组合
+ function compose(...funcs) {
+ 	if (funcs.length === 0) {
+    	return arg => arg
+  	}
 
+  	if (funcs.length === 1) {
+    	return funcs[0]
+  	}
+
+  	return funcs.reduce((a, b) => (...args) => a(b(...args)))
+ }
+   
+/*
+ * 绑定action生成函数
+ * 用于利用参数生成action，并dispatch
+ */
+function bindActionCreator(actionCreator, dispatch) {
+  return (...args) => dispatch(actionCreator(...args))
+}
+function bindActionCreators(actionCreators, dispatch) {
+  if (typeof actionCreators === 'function') {
+    return bindActionCreator(actionCreators, dispatch)
+  }
+
+  if (typeof actionCreators !== 'object' || actionCreators === null) {
+    throw new Error('')
+  }
+ 
+  const keys = Object.keys(actionCreators)
+  const boundActionCreators = {}
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i]
+    const actionCreator = actionCreators[key]
+    if (typeof actionCreator === 'function') {
+      boundActionCreators[key] = bindActionCreator(actionCreator, dispatch)
+    }
+  }
+  return boundActionCreators
+}
 
 
 
