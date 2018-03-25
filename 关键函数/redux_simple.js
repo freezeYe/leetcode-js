@@ -11,7 +11,10 @@ const ActionTypes = {
 //创建store
 function createStore(reducer, preLoadState, enhancer) {
 
-    if (typeof (preLoadState) === 'function' && enhancer === undefined) enhancer = preLoadState
+    if (typeof (preLoadState) === 'function' && enhancer === undefined) {
+        enhancer = preLoadState
+        preLoadState = undefined
+    }
     if (enhancer) return enhancer(createStore)(reducer, preLoadState)
 
     let currentReducer = reducer,
