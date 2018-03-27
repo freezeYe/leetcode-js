@@ -5,12 +5,8 @@ function treeTraverse1(root, level) {
     } else {
         return
     }
-    if (root.left) {
-        treeTraverse(root.left, level + 1)
-    }
-    if (root.right) {
-        treeTraverse(root.right, level + 1)
-    }
+    treeTraverse(root.left, level + 1)
+    treeTraverse(root.right, level + 1)
 }
 
 function treeTraverse2(root) {
@@ -18,8 +14,9 @@ function treeTraverse2(root) {
         level = 0
     queue.push(root)
     while (queue.length > 0) {
-        const temp = [...queue]
+        const temp = queue.unshift()
         queue = []
+        level++
         temp.forEach((item) => {
             console.log(`${level}:item`)
             if (item.left) queue.push(item.left)
