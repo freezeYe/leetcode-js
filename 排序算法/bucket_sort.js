@@ -6,7 +6,7 @@ const bucketSort = (arr) => ((fn) => fn(arr))((arr, radix = 10) => {
     for (let i = 0; i < K; i++) {
         arr.forEach((value) => {
             bucket[parseInt((value) / (radix ** i)) % radix].push(value)
-        });
+        })
         arr = bucket.reduce((a, b) => {
             return [...a, ...b]
         })
