@@ -1,12 +1,18 @@
-//全排列
+/**  
+ * 全排列（递归交换）算法  
+ * 1、将第一个位置分别放置各个不同的元素；  
+ * 2、对剩余的位置进行全排列（递归）；  
+ * 3、递归出口为只对一个元素进行全排列。  
+*/
 function perm1(A) {
     if (A.length === 1) { return [A] }
-    return [].concat(...A.map((a, i) => perm(A.slice(0, i)
+    return [].concat(...A.map((a, i) => perm1(A.slice(0, i)
         .concat(A.slice(i + 1)))
         .map(p => [a].concat(p))))
 }
 console.log(perm(['a', 'b', 'c']))
 
+<<<<<<< HEAD
 
 function swap(arr,i,j) {  
     if(i!=j) {  
@@ -32,3 +38,4 @@ function perm2(arr) {
     })(0);  
 }  
 perm(["e1","e2","e3","e4"]);  
+
