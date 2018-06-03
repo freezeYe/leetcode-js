@@ -6,3 +6,29 @@ function perm1(A) {
         .map(p => [a].concat(p))))
 }
 console.log(perm(['a', 'b', 'c']))
+
+
+function swap(arr,i,j) {  
+    if(i!=j) {  
+        var temp=arr[i];  
+        arr[i]=arr[j];  
+        arr[j]=temp;  
+    }  
+}  
+var count=0;  
+function show(arr) {  
+    document.write("P<sub>"+ ++count+"</sub>: "+arr+"<br />");  
+}  
+function perm2(arr) {  
+    (function fn(n) { //为第n个位置选择元素  
+        for(var i=n;i<arr.length;i++) {  
+            swap(arr,i,n);  
+            if(n+1<arr.length-1) //判断数组中剩余的待全排列的元素是否大于1个  
+                fn(n+1); //从第n+1个下标进行全排列  
+            else 
+                show(arr); //显示一组结果  
+            swap(arr,i,n);  
+        }  
+    })(0);  
+}  
+perm(["e1","e2","e3","e4"]);  
