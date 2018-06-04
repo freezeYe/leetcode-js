@@ -24,15 +24,19 @@ function kmp(s,w) {
 }
 
 function next(w) {
-	const _next = [-1]
-	let i,j = 1
-	while(j < w.length) {
-		i =_next[j-1]
-		while(i !== -1 && w[i] !== w[j]) {
-			i = _next[i]
+	const _next = [-1,0]
+	let pos = 2,cnd = 0
+	while(pos < w.length) {
+		if(w[pos-1] === w[cnd]) {
+			cnd = cnd + 1
+			_next[pos] = cnd
+			pos += 1
+		}else if(cnd > 0) {
+			cnd = _next[cnd]
+		}else {
+			_next[pos] = 0
+			pos += 1
 		}
-		_next[j] = i+1
-		j++
 	}
 	return _next
 } 
