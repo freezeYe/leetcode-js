@@ -9,11 +9,11 @@ function kmp(s,w) {
 	let i = 0,
 		j = 0
 	const _next = next(w)
+	console.log(_next)
 	while(i < s.length) {
-		while(j!== -1 && s[i] !== w[j]) {
+		if(j!== -1 && s[i] !== w[j]) {
 			j = _next[j]
-		}
-		if(j == w.length-1){
+		}else if(j == w.length-1){
 			return i
 		}else {
 			i++
