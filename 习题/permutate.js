@@ -12,7 +12,7 @@ function perm1(A) {
 }
 console.log(perm(['a', 'b', 'c']))
 
-<<<<<<< HEAD
+
 
 function swap(arr,i,j) {  
     if(i!=j) {  
@@ -21,10 +21,7 @@ function swap(arr,i,j) {
         arr[j]=temp;  
     }  
 }  
-var count=0;  
-function show(arr) {  
-    document.write("P<sub>"+ ++count+"</sub>: "+arr+"<br />");  
-}  
+
 function perm2(arr) {  
     (function fn(n) { //为第n个位置选择元素  
         for(var i=n;i<arr.length;i++) {  
