@@ -5,7 +5,7 @@
  */
 const binarySearching = (arr, value,low = 0,high)=> {
     if(high === undefined) high = arr.length - 1
-    if(low === high && arr[low] !== value && arr[high] !== value) return null
+    if(low === high-1 && arr[low] !== value && arr[high] !== value) return null
     const mid = parseInt((low + high) / 2)
     if(arr[mid] === value) return mid
     if(arr[mid] > value) return binarySearching(arr, value, low, mid)
