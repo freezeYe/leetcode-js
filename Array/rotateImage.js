@@ -18,6 +18,7 @@
  /**
  * @param {number[][]} matrix
  * @return {void} Do not return anything, modify matrix in-place instead.
+ * 思想是这样，一用api时间复杂度就网上跑，可以改用for循环来优化
  */
 var rotate = function(matrix) {
     const len = matrix.length
