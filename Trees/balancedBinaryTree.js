@@ -25,7 +25,7 @@ function balanced(root, level) {
   const maxLeftDepth = balanced(root.left, level + 1)
   const maxRightDepth = balanced(root.right, level + 1)
   if(maxLeftDepth === false || maxRightDepth === false) return false   
-  if(Math.abs(maxLeftDepth - maxRightDepth) < 2) return Math.max(maxLeftDepth,                maxRightDepth)
+  if(Math.abs(maxLeftDepth - maxRightDepth) < 2) return Math.max(maxLeftDepth, maxRightDepth)
   return false
 }
 
