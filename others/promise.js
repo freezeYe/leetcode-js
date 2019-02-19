@@ -24,25 +24,59 @@ function Promise(fn) {
       return
     }
 
-    if(!callback.onFullfilled) {
-      callback.resolve(value)
-      return
+    let cb = state === 'fulfilled' ? callback.onFulfilled : callback.onRejected,
+    if (cb === null) {
+        cb = state === 'fulfilled' ? callback.resolve : callback.reject;
+        cb(value);
+        return;
     }
-
-    const ret = callback.onFullfilled(value)
-    callback.resolve(ret)
+    ​ try {
+      ​ const ret = cb(value);
+      ​ callback.resolve(ret);
+      ​ } catch (e) {
+      ​ callback.reject(e);
+      
+    }
   }
 
-  this.then(onFullfilled) {
+  function reject(reason) {
+    state = 'rejected'
+    value = reason
+    execute()
+  }
+
+  function execute() {
+    setTimeout(function () {
+        callbacks.forEach(function (callback) {
+            handle(callback);
+        });
+    }, 0);
+  }
+
+  Promise.prototype.then = function(onFullfilled, onRejected) {
     return new Promise((resolve)=> {
       handle({
         onFullfilled,
+        onRejected,
+        reject,
         resolve
       })
     })
   }
 
-  fn(resolve)
+  Promise.prototype.catch = function(reject) {
+
+  }
+
+  Promise.prototype.race = function() {
+
+  }
+
+  Promise.prototype.reduce = function() {
+
+  }
+
+  fn(resolve, reject)
 }
 
 const p = new Promise((resolve)=> {
