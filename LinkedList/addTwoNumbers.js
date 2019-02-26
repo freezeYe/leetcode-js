@@ -4,7 +4,7 @@
  */
 
 /**
- * @param {ListNode} l1
+ * @param {ListNod}
  * @param {ListNode} l2
  * @return {ListNode}
  */
