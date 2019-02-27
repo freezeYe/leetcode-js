@@ -11,6 +11,13 @@
  *     this.next = null;
  * }
  */
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
 
 /**
  * @param {ListNode} headA
@@ -18,38 +25,12 @@
  * @return {ListNode}
  */
 var getIntersectionNode = function(headA, headB) {
-    let lenA = calculateLength(headA),
-        lenB = calculateLength(headB),
-        currentA = headA,
-        currentB = headB
-    let m = Math.abs(lenA - lenB)
-    if(lenA > lenB) {
-        while(m > 0) {
-            m--
-            currentA = currentA.next
-        }
+    if(!headA || !headB) return null
+    let stepA = headA,
+        stepB = headB
+    while(stepA !== stepB) {
+        stepA = (stepA !== null) ? stepA.next : headB
+        stepB = (stepB !== null) ? stepB.next : headA
     }
-    if(lenA < lenB) {
-        while(m > 0) {
-            m--
-            currentB = currentB.next
-        }
-    }
-    while(currentA) {
-        if(currentA === currentB) return currentA
-        currentA = currentA.next
-        currentB = currentB.next
-    }
-    return null
+    return stepA
 };
-
-
-function calculateLength(head) {
-    let len = 0
-    while(head) {
-        len++
-        head = head.next
-    }
-    return len
-}
-
