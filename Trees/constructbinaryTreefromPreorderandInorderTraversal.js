@@ -1,30 +1,22 @@
 /**
  * Given preorder and inorder traversal of a tree, construct the binary tree.
  */
-
-/**
- * Definition for a binary tree node.
- * function TreeNode(val) {
- *     this.val = val;
- *     this.left = this.right = null;
- * }
- */
-/**
- * @param {number[]} preorder
- * @param {number[]} inorder
- * @return {TreeNode}
- */
 var buildTree = function(preorder, inorder) {
-    p = i = 0
-    build = function(stop) {
-        if (inorder[i] != stop) {
-            var root = new TreeNode(preorder[p++])
-            root.left = build(root.val)
-            i++
-            root.right = build(stop)
-            return root
+    function helper(p1, p2, i1, i2) {
+        if (p1 > p2 || i1 > i2) {
+            return null;
         }
-        return null
+        
+        let value = preorder[p1];
+        let pos = inorder.indexOf(value);
+        let numToLeft = pos - i1;
+        let root = new TreeNode(value);
+        
+        root.left = helper(p1 + 1, p1 + numToLeft + 1, i1, pos - 1);
+        root.right = helper(p1 + numToLeft + 1, p2, pos + 1, i2);
+        
+        return root;
     }
-    return build()
+    
+    return helper(0, preorder.length - 1, 0, inorder.length - 1);
 };
