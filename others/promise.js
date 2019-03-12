@@ -9,6 +9,7 @@ function Promise(fn) {
     if(_value && typeof _value.then === 'function')) {
       const then = _value.then
       then.call(_value, resolve)
+      return
     }
 
     state = 'fullfilled'
@@ -24,9 +25,9 @@ function Promise(fn) {
       return
     }
 
-    let cb = state === 'fulfilled' ? callback.onFulfilled : callback.onRejected,
+    let cb = state === 'fullfilled' ? callback.onFulfilled : callback.onRejected,
     if (cb === null) {
-        cb = state === 'fulfilled' ? callback.resolve : callback.reject;
+        cb = state === 'fullfilled' ? callback.resolve : callback.reject;
         cb(value);
         return;
     }
@@ -65,17 +66,37 @@ function Promise(fn) {
   }
 
   Promise.prototype.catch = function(reject) {
-
+    this.then(resolve, reject)
   }
 
-  Promise.prototype.race = function() {
-
+  Promise.prototype.race = function(arr) { 
+    return new Promise((resolve, reject)=> {
+      if(arr.length === 0) reject('input rece promises!')
+      arr.forEach((a)=> {
+        resolve(a)
+      })
+    })
   }
 
-  Promise.prototype.reduce = function() {
-
+  Promise.prototype.all = function(arr) {
+    let len = arr.length
+    const result = []
+    return new Promise(function (resolve, reject) {
+      arr.forEach((a, index)=> {
+        if(a && typeof a.then === 'function') {
+          a.then((data)=> {
+            result[index] = data
+            len--
+            if(len === 0) resolve(result)
+          }, (data)=> reject(data))
+        }else {
+          result[index] = a
+          len--
+          if(len === 0) resolve(result)
+        }
+      })
+    })
   }
-
   fn(resolve, reject)
 }
 
