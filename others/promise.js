@@ -73,7 +73,7 @@ function Promise(fn) {
     return new Promise((resolve, reject)=> {
       if(arr.length === 0) reject('input rece promises!')
       arr.forEach((a)=> {
-        resolve(a)
+        a.then(data=> resolve(data), e=> reject(e))
       })
     })
   }
