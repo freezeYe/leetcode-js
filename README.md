@@ -1,3 +1,3 @@
 # Algorithm
-## Naming rules
+### Naming rules
     [Index].[Type].[Difficulty]-[Title]
