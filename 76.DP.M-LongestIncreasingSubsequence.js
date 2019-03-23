@@ -27,30 +27,30 @@ var lengthOfLIS = function(nums) {
 };
 
 O(NlogN)
-const binarySearch = (nums, n, target) => {
-    let left = 0
-    let right = n
-    
-    while(left < right) {
-      let mid = left + Math.floor((right - left) / 2)
-      if (nums[mid] < target) {
-        left = mid + 1
-      } else {
-        right = mid
-      }
+var lengthOfLIS = function(nums) {
+    const binarySearch = (nums, n, target) => {
+        let left = 0
+        let right = n
+        
+        while(left < right) {
+          let mid = left + Math.floor((right - left) / 2)
+          if (nums[mid] < target) {
+            left = mid + 1
+          } else {
+            right = mid
+          }
+        }
+        return left
     }
-    return left
-  }
-  var lengthOfLIS = function(nums) {
     let len = 0
     const dp = new Array(nums.length).fill(0)
-    
+
     for (let i =0; i < nums.length; i++) {
-      const pos = binarySearch(dp, len, nums[i])
-      dp[pos] = nums[i]
-      if (pos === len) {
+        const pos = binarySearch(dp, len, nums[i])
+        dp[pos] = nums[i]
+        if (pos === len) {
         len++
-      }
+        }
     }
     return len
-  };
+};
