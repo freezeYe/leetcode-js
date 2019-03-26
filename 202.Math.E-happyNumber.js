@@ -11,20 +11,10 @@
  * @return {boolean}
  */
 var isHappy = function(n) {
-    const or = new Set()
-    const g = (t)=> {
-        if(t === 1) return true
-        if(or.has(t)) return false
-        or.add(t)
-        const r = (()=> {
-            let d = 0
-           while(t) {
-              d += (t % 10)**2
-              t = parseInt(t / 10)
-           }
-            return d
-        })()
-        return g(r)
+    const set = new Set()
+    while(!set.has(n)) {
+        set.add(n)
+        n = String(n).split('').reduce((all,num)=> all + parseInt(num)**2,0)
     }
-    return g(n)
+    return n === 1
 };
