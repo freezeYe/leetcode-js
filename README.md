@@ -1,4 +1,4 @@
-# LeetCode exercises
+# leetcode exercises - javascript
 
 [1. 两数之和(简单)](./1.两数之和.md)
 
