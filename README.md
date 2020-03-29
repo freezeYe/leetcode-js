@@ -1,4 +1,4 @@
-# LeetCode习题JS版
+# leetcode习题 - js版
 
 [1. 两数之和(简单)](./1.两数之和.md)
 
